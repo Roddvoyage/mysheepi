@@ -1,0 +1,421 @@
+{% liquid
+  assign mf = page.metafields.custom
+
+  assign heading = mf.how_it_works_heading
+  assign cta_label = mf.how_it_works_cta_label
+  assign cta_link = mf.how_it_works_cta_link
+
+  assign step_1_icon = mf.how_it_works_step_1_icon
+  assign step_1_title = mf.how_it_works_step_1_title
+  assign step_1_text = mf.how_it_works_step_1_text
+
+  assign step_2_icon = mf.how_it_works_step_2_icon
+  assign step_2_title = mf.how_it_works_step_2_title
+  assign step_2_text = mf.how_it_works_step_2_text
+
+  assign step_3_icon = mf.how_it_works_step_3_icon
+  assign step_3_title = mf.how_it_works_step_3_title
+  assign step_3_text = mf.how_it_works_step_3_text
+
+  assign step_4_icon = mf.how_it_works_step_4_icon
+  assign step_4_title = mf.how_it_works_step_4_title
+  assign step_4_text = mf.how_it_works_step_4_text
+%}
+
+<section class="mysheepi-how-it-works">
+  <div class="mysheepi-how-it-works__inner">
+    {% if heading != blank %}
+      <h2 class="mysheepi-how-it-works__heading">{{ heading.value }}</h2>
+    {% endif %}
+
+    <div class="mysheepi-how-it-works__grid">
+      <div class="mysheepi-how-it-works__item">
+        <div class="mysheepi-how-it-works__top">
+          <div class="mysheepi-how-it-works__number">01</div>
+
+          {% if step_1_icon != blank %}
+            <div class="mysheepi-how-it-works__icon">
+              {{ step_1_icon | metafield_tag }}
+            </div>
+          {% endif %}
+        </div>
+
+        {% if step_1_title != blank %}
+          <h3 class="mysheepi-how-it-works__title">{{ step_1_title.value }}</h3>
+        {% endif %}
+
+        {% if step_1_text != blank %}
+          <div class="mysheepi-how-it-works__text">
+            {{ step_1_text.value | newline_to_br }}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="mysheepi-how-it-works__item">
+        <div class="mysheepi-how-it-works__top">
+          <div class="mysheepi-how-it-works__number">02</div>
+
+          {% if step_2_icon != blank %}
+            <div class="mysheepi-how-it-works__icon">
+              {{ step_2_icon | metafield_tag }}
+            </div>
+          {% endif %}
+        </div>
+
+        {% if step_2_title != blank %}
+          <h3 class="mysheepi-how-it-works__title">{{ step_2_title.value }}</h3>
+        {% endif %}
+
+        {% if step_2_text != blank %}
+          <div class="mysheepi-how-it-works__text">
+            {{ step_2_text.value | newline_to_br }}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="mysheepi-how-it-works__item">
+        <div class="mysheepi-how-it-works__top">
+          <div class="mysheepi-how-it-works__number">03</div>
+
+          {% if step_3_icon != blank %}
+            <div class="mysheepi-how-it-works__icon">
+              {{ step_3_icon | metafield_tag }}
+            </div>
+          {% endif %}
+        </div>
+
+        {% if step_3_title != blank %}
+          <h3 class="mysheepi-how-it-works__title">{{ step_3_title.value }}</h3>
+        {% endif %}
+
+        {% if step_3_text != blank %}
+          <div class="mysheepi-how-it-works__text">
+            {{ step_3_text.value | newline_to_br }}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="mysheepi-how-it-works__item">
+        <div class="mysheepi-how-it-works__top">
+          <div class="mysheepi-how-it-works__number">04</div>
+
+          {% if step_4_icon != blank %}
+            <div class="mysheepi-how-it-works__icon">
+              {{ step_4_icon | metafield_tag }}
+            </div>
+          {% endif %}
+        </div>
+
+        {% if step_4_title != blank %}
+          <h3 class="mysheepi-how-it-works__title">{{ step_4_title.value }}</h3>
+        {% endif %}
+
+        {% if step_4_text != blank %}
+          <div class="mysheepi-how-it-works__text">
+            {{ step_4_text.value | newline_to_br }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if cta_label != blank %}
+      <div class="mysheepi-how-it-works__button-wrap">
+        <a href="{{ cta_link.value | default: '#' }}" class="mysheepi-how-it-works__button">
+          {{ cta_label.value }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .mysheepi-how-it-works {
+    background: #fbece0;
+    padding: 72px 0 80px;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .mysheepi-how-it-works,
+  .mysheepi-how-it-works *,
+  .mysheepi-how-it-works *::before,
+  .mysheepi-how-it-works *::after {
+    box-sizing: border-box;
+  }
+
+  .mysheepi-how-it-works__inner {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+
+  .mysheepi-how-it-works__heading {
+    margin: 0 0 46px;
+    text-align: center;
+    color: #007663;
+    font-size: 56px;
+    line-height: 1.05;
+    font-weight: 400;
+    font-family: "Cormorant Garamond", serif;
+  }
+
+  .mysheepi-how-it-works__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 28px;
+    align-items: start;
+  }
+
+  .mysheepi-how-it-works__item {
+    text-align: center;
+    min-width: 0;
+  }
+
+  .mysheepi-how-it-works__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 30%;
+    margin-bottom: 18px;
+    min-height: 72px;
+  }
+
+  .mysheepi-how-it-works__number {
+    width: 26px;
+    height: 26px;
+    border-radius: 999px;
+    background: #007663;
+    color: #fbece0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1;
+    flex: 0 0 26px;
+    margin-top: 2px;
+  }
+
+  .mysheepi-how-it-works__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 62px;
+  }
+
+  .mysheepi-how-it-works__icon img {
+    display: block;
+    width: auto;
+    height: 58px;
+    object-fit: contain;
+    margin: 0 auto;
+  }
+
+  .mysheepi-how-it-works__title {
+    margin: 0 0 8px;
+    color: #007663;
+    font-size: 24px;
+    line-height: 1.2;
+    font-weight: 400;
+    font-family: "Cormorant Garamond", serif;
+  }
+
+  .mysheepi-how-it-works__text {
+    margin: 0 auto;
+    max-width: 220px;
+    color: #3d3d3d;
+    font-size: 16px;
+    line-height: 1.35;
+    font-weight: 500;
+    font-family: Inter, sans-serif;
+  }
+
+  .mysheepi-how-it-works__button-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 42px;
+  }
+
+  .mysheepi-how-it-works__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 280px;
+    min-height: 48px;
+    padding: 0 28px;
+    border-radius: 999px;
+    background: #dc325f;
+    color: #fbece0;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 700;
+  transition: transform 200ms ease !important;
+  }
+
+  .mysheepi-how-it-works__button:hover {
+ transform: scaleX(1.05);
+  }
+
+  @media screen and (max-width: 1199px) and (min-width: 990px) {
+    .mysheepi-how-it-works__inner {
+      padding-left: 80px;
+      padding-right: 80px;
+    }
+  }
+
+
+  @media screen and (max-width: 989px) {
+    .mysheepi-how-it-works__inner {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+  }
+
+
+
+  @media screen and (max-width: 789px) {
+    .mysheepi-how-it-works {
+      padding: 56px 0 64px;
+    }
+
+    .mysheepi-how-it-works__inner {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+
+    .mysheepi-how-it-works__heading {
+      margin-bottom: 34px;
+      font-size: 42px;
+    }
+
+    .mysheepi-how-it-works__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 34px 22px;
+    }
+
+    .mysheepi-how-it-works__item {
+      max-width: 260px;
+      margin: 0 auto;
+    }
+
+    .mysheepi-how-it-works__item:nth-child(odd) .mysheepi-how-it-works__top {
+      gap: 20%;
+    }
+
+    .mysheepi-how-it-works__item:nth-child(even) .mysheepi-how-it-works__top {
+      gap: 30%;
+    }
+
+    .mysheepi-how-it-works__number {
+      width: 34px;
+      height: 34px;
+      font-size: 15px;
+      flex: 0 0 34px;
+      margin-top: 0;
+    }
+
+    .mysheepi-how-it-works__icon img {
+      height: 68px;
+    }
+
+    .mysheepi-how-it-works__title {
+      font-size: 22px;
+    }
+
+    .mysheepi-how-it-works__text {
+      max-width: 240px;
+      font-size: 17px;
+    }
+
+    .mysheepi-how-it-works__button {
+      width: 100%;
+      max-width: 300px;
+      min-width: 0;
+      min-height: 56px;
+      font-size: 16px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .mysheepi-how-it-works {
+      padding: 52px 0 60px;
+    }
+
+    .mysheepi-how-it-works__inner {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .mysheepi-how-it-works__heading {
+      font-size: 36px;
+      margin-bottom: 30px;
+    }
+
+    .mysheepi-how-it-works__grid {
+      gap: 30px 18px;
+    }
+
+    .mysheepi-how-it-works__item {
+      max-width: 220px;
+    }
+
+    .mysheepi-how-it-works__item:nth-child(odd) .mysheepi-how-it-works__top {
+      gap: 20%;
+    }
+
+    .mysheepi-how-it-works__item:nth-child(even) .mysheepi-how-it-works__top {
+      gap: 30%;
+    }
+
+    .mysheepi-how-it-works__number {
+      width: 30px;
+      height: 30px;
+      font-size: 14px;
+      flex: 0 0 30px;
+    }
+
+    .mysheepi-how-it-works__icon img {
+      height: 56px;
+    }
+
+    .mysheepi-how-it-works__title {
+      font-size: 20px;
+    }
+
+    .mysheepi-how-it-works__text {
+      max-width: 220px;
+      font-size: 15px;
+    }
+
+    .mysheepi-how-it-works__button {
+      min-height: 52px;
+      font-size: 15px;
+    }
+  }
+
+
+
+  @media screen and (max-width: 380px) {
+    .mysheepi-how-it-works__item:nth-child(2n) .mysheepi-how-it-works__top {
+        gap: 20%;
+    }
+  }
+
+
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "MySheepi How It Works",
+  "settings": [],
+  "presets": [
+    {
+      "name": "MySheepi How It Works"
+    }
+  ]
+}
+{% endschema %}

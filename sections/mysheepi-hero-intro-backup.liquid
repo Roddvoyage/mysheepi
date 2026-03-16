@@ -1,0 +1,358 @@
+{% liquid
+  assign hero_heading = page.metafields.custom.hero_heading.value
+  assign hero_subheading = page.metafields.custom.hero_subheading.value
+  assign hero_cta_label = page.metafields.custom.hero_cta_label.value
+  assign hero_cta_link = page.metafields.custom.hero_cta_link.value
+  assign hero_trust_line = page.metafields.custom.hero_trust_line.value
+  assign hero_image = page.metafields.custom.hero_image.value
+  assign hero_image_mobile = page.metafields.custom.hero_image_mobile.value
+%}
+
+<section class="mysheepi-hero">
+  <div class="mysheepi-hero__inner">
+    <div class="mysheepi-hero__content">
+      <h1 class="mysheepi-hero__title">
+        {{ hero_heading | default: 'Our product is the best product' }}
+      </h1>
+
+      <p class="mysheepi-hero__text">
+        {{ hero_subheading | default: 'We deliver fast, secure and free, all orders above $550' }}
+      </p>
+
+      {% if hero_cta_label != blank %}
+        <a
+          href="{{ hero_cta_link | default: '#' }}"
+          class="mysheepi-hero__button"
+        >
+          {{ hero_cta_label }}
+        </a>
+      {% else %}
+        <a href="#" class="mysheepi-hero__button">Get Dinner Sorted</a>
+      {% endif %}
+
+      <p class="mysheepi-hero__trust">
+        {{ hero_trust_line | default: "Trusted by 1000's of Londoners weekly" }}
+      </p>
+    </div>
+
+    <div class="mysheepi-hero__media">
+      <div class="mysheepi-hero__image-wrap">
+        {% if hero_image != blank %}
+          {{
+            hero_image
+            | image_url: width: 1600
+            | image_tag:
+              loading: 'lazy',
+              class: 'mysheepi-hero__image mysheepi-hero__image--desktop',
+              widths: '600, 800, 1000, 1200, 1400, 1600',
+              sizes: '(min-width: 990px) 50vw, 100vw'
+          }}
+        {% endif %}
+
+        {% if hero_image_mobile != blank %}
+          {{
+            hero_image_mobile
+            | image_url: width: 1600
+            | image_tag:
+              loading: 'lazy',
+              class: 'mysheepi-hero__image mysheepi-hero__image--mobile',
+              widths: '600, 800, 1000, 1200, 1400, 1600',
+              sizes: '100vw'
+          }}
+        {% elsif hero_image != blank %}
+          {{
+            hero_image
+            | image_url: width: 1600
+            | image_tag:
+              loading: 'lazy',
+              class: 'mysheepi-hero__image mysheepi-hero__image--mobile',
+              widths: '600, 800, 1000, 1200, 1400, 1600',
+              sizes: '100vw'
+          }}
+        {% elsif hero_image == blank %}
+          {{ 'image' | placeholder_svg_tag: 'mysheepi-hero__image mysheepi-hero__image--placeholder' }}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .mysheepi-hero {
+    background-color: #F8BA23;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .mysheepi-hero,
+  .mysheepi-hero *,
+  .mysheepi-hero *::before,
+  .mysheepi-hero *::after {
+    box-sizing: border-box;
+  }
+
+  .mysheepi-hero__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: stretch;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .mysheepi-hero__content,
+  .mysheepi-hero__media {
+    min-width: 0;
+  }
+
+  .mysheepi-hero__content {
+    padding: 40px 16px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .mysheepi-hero__title {
+    margin: 0 0 20px;
+    font-size: clamp(2.4rem, 7vw, 5rem);
+    line-height: 0.95;
+    letter-spacing: 0em;
+    font-weight: 500;
+    color: #007663;
+    font-family: "Cormorant Garamond", serif;
+  }
+
+  .mysheepi-hero__text {
+    margin: 0 0 26px;
+    max-width: 560px;
+    font-size: 1.125rem;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 1);
+    font-family: Inter, sans-serif;
+  }
+
+  .mysheepi-hero__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+    min-height: 56px;
+    padding: 0 28px;
+    border-radius: 999px;
+    background: #DC325F;
+    color: #FBECE0;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1;
+  transition: transform 200ms ease !important;
+  }
+
+  .mysheepi-hero__button:hover {
+ transform: scaleX(1.05);
+  }
+
+
+
+  .mysheepi-hero__trust {
+    margin: 18px 0 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 1);
+    font-family: Inter, sans-serif;
+  }
+
+  .mysheepi-hero__media {
+    width: 100%;
+    height: auto;
+  }
+
+  .mysheepi-hero__image-wrap {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    background: #f2f2f2;
+  }
+
+  .mysheepi-hero__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .mysheepi-hero__image--desktop {
+    display: none;
+  }
+
+  .mysheepi-hero__image--mobile {
+    display: block;
+  }
+
+  .mysheepi-hero__image--placeholder {
+    min-height: 320px;
+    background: #f2f2f2;
+  }
+
+  @media screen and (min-width: 740px) {
+    .mysheepi-hero {
+      min-height: calc(100vh - 80px);
+      width: 100vw;
+    }
+
+    .mysheepi-hero__inner {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      min-height: calc(100vh - 80px);
+      width: 100vw;
+    }
+
+    .mysheepi-hero__content {
+      padding-top: 80px;
+      padding-bottom: 80px;
+      padding-left: 120px;
+      padding-right: 80px;
+    }
+
+    .mysheepi-hero__media {
+      height: 100%;
+      min-height: calc(100vh - 80px);
+    }
+
+    .mysheepi-hero__image-wrap {
+      height: 100%;
+      min-height: calc(100vh - 80px);
+    }
+
+    .mysheepi-hero__image {
+      width: 100%;
+      height: 100%;
+      min-height: calc(100vh - 80px);
+      object-fit: cover;
+    }
+
+    .mysheepi-hero__image--desktop {
+      display: block;
+    }
+
+    .mysheepi-hero__image--mobile {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 1199px) and (min-width: 990px) {
+    .mysheepi-hero__content {
+      padding-left: 80px;
+      padding-right: 56px;
+    }
+
+    .mysheepi-hero {
+      width: 100vw;
+    }
+  }
+
+  @media screen and (max-width: 989px) {
+    .mysheepi-hero {
+      min-width: 100vw;
+      width: 100vw;
+      height: calc(100vh - 80px);
+      overflow: hidden;
+    }
+
+    .mysheepi-hero__inner {
+      gap: 0;
+      height: auto;
+      min-height: 0;
+      width: 100vw;
+      overflow: hidden;
+    }
+
+    .mysheepi-hero__content {
+      padding-left: 40px;
+      padding-right: 40px;
+      padding-top: 40px;
+      padding-bottom: 28px;
+      display: flex;
+      flex: 0 0 auto;
+    }
+
+    .mysheepi-hero__button {
+      width: 100%;
+      max-width: 240px;
+    }
+
+    .mysheepi-hero__media {
+      flex: 1 1 auto;
+      min-height: 50vh;
+    }
+
+    .mysheepi-hero__image-wrap {
+      height: 100%;
+    }
+
+    .mysheepi-hero__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 80%;
+    }
+  }
+
+  @media screen and (max-width: 989px) and (min-width: 781px) {
+    .mysheepi-hero__content {
+      padding-left: 60px;
+      padding-right: 40px;
+    }
+  }
+
+  @media screen and (max-width: 780px) and (min-width: 641px) {
+    .mysheepi-hero__content {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .mysheepi-hero__content {
+      padding-left: 16px;
+      padding-right: 16px;
+      padding-top: 28px;
+      padding-bottom: 20px;
+    }
+
+    .mysheepi-hero__title {
+      margin-bottom: 14px;
+    }
+
+    .mysheepi-hero__text {
+      margin-bottom: 20px;
+      font-size: 1rem;
+    }
+
+    .mysheepi-hero__button {
+      min-height: 52px;
+      padding: 0 24px;
+    }
+
+    .mysheepi-hero__trust {
+      margin-top: 14px;
+      font-size: 0.9rem;
+    }
+
+    .mysheepi-hero__image-wrap {
+      border-radius: 0;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "MySheepi Hero Intro",
+  "settings": [],
+  "presets": [
+    {
+      "name": "MySheepi Hero Intro"
+    }
+  ]
+}
+{% endschema %}

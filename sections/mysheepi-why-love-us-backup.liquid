@@ -1,0 +1,424 @@
+{% liquid
+  assign mf = page.metafields.custom
+
+  assign heading = mf.why_love_us_heading
+  assign cta_label = mf.why_love_us_cta_label
+  assign cta_link = mf.why_love_us_cta_link
+  assign section_image = mf.why_love_us_image
+
+  assign item_1_icon = mf.why_love_us_item_1_icon
+  assign item_1_title = mf.why_love_us_item_1_title
+  assign item_1_text = mf.why_love_us_item_1_text
+
+  assign item_2_icon = mf.why_love_us_item_2_icon
+  assign item_2_title = mf.why_love_us_item_2_title
+  assign item_2_text = mf.why_love_us_item_2_text
+
+  assign item_3_icon = mf.why_love_us_item_3_icon
+  assign item_3_title = mf.why_love_us_item_3_title
+  assign item_3_text = mf.why_love_us_item_3_text
+
+  assign item_4_icon = mf.why_love_us_item_4_icon
+  assign item_4_title = mf.why_love_us_item_4_title
+  assign item_4_text = mf.why_love_us_item_4_text
+%}
+
+<section class="mysheepi-why-love-us">
+  <div class="mysheepi-why-love-us__inner">
+    <div class="mysheepi-why-love-us__grid">
+      <div class="mysheepi-why-love-us__content">
+        {% if heading != blank %}
+          <h2 class="mysheepi-why-love-us__heading">{{ heading.value }}</h2>
+        {% endif %}
+
+        <div class="mysheepi-why-love-us__list">
+          {% if item_1_title != blank or item_1_text != blank or item_1_icon != blank %}
+            <div class="mysheepi-why-love-us__item">
+              {% if item_1_icon != blank %}
+                <div class="mysheepi-why-love-us__icon">
+                  {{ item_1_icon | metafield_tag }}
+                </div>
+              {% endif %}
+
+              <div class="mysheepi-why-love-us__item-content">
+                {% if item_1_title != blank %}
+                  <h3 class="mysheepi-why-love-us__item-title">{{ item_1_title.value }}</h3>
+                {% endif %}
+
+                {% if item_1_text != blank %}
+                  <div class="mysheepi-why-love-us__item-text">
+                    {{ item_1_text.value | newline_to_br }}
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+
+          {% if item_2_title != blank or item_2_text != blank or item_2_icon != blank %}
+            <div class="mysheepi-why-love-us__item">
+              {% if item_2_icon != blank %}
+                <div class="mysheepi-why-love-us__icon">
+                  {{ item_2_icon | metafield_tag }}
+                </div>
+              {% endif %}
+
+              <div class="mysheepi-why-love-us__item-content">
+                {% if item_2_title != blank %}
+                  <h3 class="mysheepi-why-love-us__item-title">{{ item_2_title.value }}</h3>
+                {% endif %}
+
+                {% if item_2_text != blank %}
+                  <div class="mysheepi-why-love-us__item-text">
+                    {{ item_2_text.value | newline_to_br }}
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+
+          {% if item_3_title != blank or item_3_text != blank or item_3_icon != blank %}
+            <div class="mysheepi-why-love-us__item">
+              {% if item_3_icon != blank %}
+                <div class="mysheepi-why-love-us__icon">
+                  {{ item_3_icon | metafield_tag }}
+                </div>
+              {% endif %}
+
+              <div class="mysheepi-why-love-us__item-content">
+                {% if item_3_title != blank %}
+                  <h3 class="mysheepi-why-love-us__item-title">{{ item_3_title.value }}</h3>
+                {% endif %}
+
+                {% if item_3_text != blank %}
+                  <div class="mysheepi-why-love-us__item-text">
+                    {{ item_3_text.value | newline_to_br }}
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+
+          {% if item_4_title != blank or item_4_text != blank or item_4_icon != blank %}
+            <div class="mysheepi-why-love-us__item">
+              {% if item_4_icon != blank %}
+                <div class="mysheepi-why-love-us__icon">
+                  {{ item_4_icon | metafield_tag }}
+                </div>
+              {% endif %}
+
+              <div class="mysheepi-why-love-us__item-content">
+                {% if item_4_title != blank %}
+                  <h3 class="mysheepi-why-love-us__item-title">{{ item_4_title.value }}</h3>
+                {% endif %}
+
+                {% if item_4_text != blank %}
+                  <div class="mysheepi-why-love-us__item-text">
+                    {{ item_4_text.value | newline_to_br }}
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+        </div>
+
+        {% if cta_label != blank %}
+          <div class="mysheepi-why-love-us__button-wrap">
+            <a href="{{ cta_link.value | default: '#' }}" class="mysheepi-why-love-us__button">
+              {{ cta_label.value }}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="mysheepi-why-love-us__media">
+        {% if section_image != blank %}
+          <div class="mysheepi-why-love-us__image-wrap">
+            {{ section_image | metafield_tag }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .mysheepi-why-love-us {
+    background: #fbece0;
+    padding: 72px 0 80px;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .mysheepi-why-love-us,
+  .mysheepi-why-love-us *,
+  .mysheepi-why-love-us *::before,
+  .mysheepi-why-love-us *::after {
+    box-sizing: border-box;
+  }
+
+  .mysheepi-why-love-us__inner {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding-left: 120px;
+    padding-right: 80px;
+  }
+
+  .mysheepi-why-love-us__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 520px);
+    gap: 20px;
+    align-items: center;
+  }
+
+  .mysheepi-why-love-us__heading {
+    margin: 0 0 32px;
+    color: #007663;
+    font-size: 56px;
+    line-height: 0.95;
+    font-weight: 400;
+    font-family: "Cormorant Garamond", serif;
+    max-width: 360px;
+    min-width: 100%;
+  }
+
+  .mysheepi-why-love-us__list {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .mysheepi-why-love-us__item {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+  }
+
+  .mysheepi-why-love-us__icon {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 3px;
+  }
+
+  .mysheepi-why-love-us__icon img {
+    display: block;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    object-fit: contain;
+  }
+
+  .mysheepi-why-love-us__item-title {
+    margin: 0 0 4px;
+    color: #007663;
+    font-size: 28px;
+    line-height: 1.1;
+    font-weight: 400;
+    font-family: "Cormorant Garamond", serif;
+    margin-bottom: 10px;
+  }
+
+  .mysheepi-why-love-us__item-text {
+    color: #2f2f2f;
+    font-size: 16px;
+    line-height: 1.45;
+    font-weight: 400;
+    font-family: Inter, sans-serif;
+    max-width: 360px;
+    min-width: 100%;
+  }
+
+  .mysheepi-why-love-us__button-wrap {
+    margin-top: 22px;
+  }
+
+  .mysheepi-why-love-us__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 280px;
+    min-height: 48px;
+    padding: 0 14px;
+    border-radius: 999px;
+    background: #dc325f;
+    color: #fbece0;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 700;
+    font-family: Inter, sans-serif;
+    margin-top: 20px;
+  transition: transform 200ms ease !important;
+  }
+
+  .mysheepi-why-love-us__button:hover {
+ transform: scaleX(1.05);
+  }
+
+
+  .mysheepi-why-love-us__media {
+    min-width: 0;
+  }
+
+  .mysheepi-why-love-us__image-wrap {
+    width: 100%;
+    max-width: 520px;
+    margin-left: auto;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .mysheepi-why-love-us__image-wrap img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+
+  @media screen and (max-width: 1199px) and (min-width: 990px) {
+    .mysheepi-why-love-us__inner {
+      padding-left: 60px;
+      padding-right: 60px;
+    }
+
+    .mysheepi-why-love-us__grid {
+      gap: 44px;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 440px);
+    }
+  }
+
+
+    @media screen and (max-width: 989px) {
+
+    .mysheepi-why-love-us__inner {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+
+    .mysheepi-why-love-us__image-wrap {
+    width: 100%;
+    max-width: 360px;
+    margin-left: auto;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.mysheepi-why-love-us__grid {
+        gap: 20px;
+        grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+    }
+
+    .mysheepi-why-love-us__media{
+      width: 360px;
+    }
+
+    }
+
+  @media screen and (max-width: 789px) {
+    .mysheepi-why-love-us {
+      padding: 56px 0 64px;
+    }
+
+    .mysheepi-why-love-us__inner {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+
+    .mysheepi-why-love-us__grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .mysheepi-why-love-us__media {
+      width: 100%;
+      order: -1;
+    }
+
+    .mysheepi-why-love-us__image-wrap {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .mysheepi-why-love-us__content {
+      max-width: 520px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .mysheepi-why-love-us__heading {
+      font-size: 42px;
+      margin-bottom: 32px;
+      max-width: 240px;
+      min-width: 100%;
+    }
+
+    .mysheepi-why-love-us__list {
+      gap: 20px;
+    }
+
+    .mysheepi-why-love-us__item {
+      grid-template-columns: 40px minmax(0, 1fr);
+      gap: 24px;
+    }
+
+
+    .mysheepi-why-love-us__item-text {
+      font-size: 16px;
+      max-width: none;
+      min-width: 100%;
+    }
+
+    .mysheepi-why-love-us__button {
+      min-width: 170px;
+      min-height: 38px;
+      padding: 0 18px;
+      font-size: 14px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .mysheepi-why-love-us {
+      padding: 52px 0 60px;
+    }
+
+    .mysheepi-why-love-us__inner {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .mysheepi-why-love-us__grid {
+      gap: 32px;
+    }
+
+    .mysheepi-why-love-us__list {
+      gap: 18px;
+    }
+
+    .mysheepi-why-love-us__item {
+      grid-template-columns: 40px minmax(0, 1fr);
+    }
+
+
+    .mysheepi-why-love-us__item-title {
+    font-size: 28px;
+    }
+
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "MySheepi Why Love Us",
+  "settings": [],
+  "presets": [
+    {
+      "name": "MySheepi Why Love Us"
+    }
+  ]
+}
+{% endschema %}

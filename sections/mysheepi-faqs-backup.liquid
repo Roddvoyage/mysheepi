@@ -1,0 +1,396 @@
+{% liquid
+  assign mf = page.metafields.custom
+
+  assign heading = mf.faq_heading
+
+  assign faq_1_question = mf.faq_1_question
+  assign faq_1_answer = mf.faq_1_answer
+
+  assign faq_2_question = mf.faq_2_question
+  assign faq_2_answer = mf.faq_2_answer
+
+  assign faq_3_question = mf.faq_3_question
+  assign faq_3_answer = mf.faq_3_answer
+
+  assign faq_4_question = mf.faq_4_question
+  assign faq_4_answer = mf.faq_4_answer
+
+  assign faq_5_question = mf.faq_5_question
+  assign faq_5_answer = mf.faq_5_answer
+%}
+
+<section class="mysheepi-faqs">
+  <div class="mysheepi-faqs__inner">
+    <h2 class="mysheepi-faqs__heading">{{ heading.value | default: 'FAQs' }}</h2>
+
+    <div class="mysheepi-faqs__list" data-mysheepi-faqs>
+      <details class="mysheepi-faqs__item" open>
+        <summary class="mysheepi-faqs__question">
+          <span>{{ faq_1_question.value | default: 'What is example?' }}</span>
+          <span class="mysheepi-faqs__icon" aria-hidden="true"></span>
+        </summary>
+        {% if faq_1_answer != blank %}
+          <div class="mysheepi-faqs__content">
+            <div class="mysheepi-faqs__answer">
+              {{ faq_1_answer.value | newline_to_br }}
+            </div>
+          </div>
+        {% endif %}
+      </details>
+
+      <details class="mysheepi-faqs__item">
+        <summary class="mysheepi-faqs__question">
+          <span>{{ faq_2_question.value | default: 'How does example work?' }}</span>
+          <span class="mysheepi-faqs__icon" aria-hidden="true"></span>
+        </summary>
+        {% if faq_2_answer != blank %}
+          <div class="mysheepi-faqs__content">
+            <div class="mysheepi-faqs__answer">
+              {{ faq_2_answer.value | newline_to_br }}
+            </div>
+          </div>
+        {% endif %}
+      </details>
+
+      <details class="mysheepi-faqs__item">
+        <summary class="mysheepi-faqs__question">
+          <span>{{ faq_3_question.value | default: 'How much is example?' }}</span>
+          <span class="mysheepi-faqs__icon" aria-hidden="true"></span>
+        </summary>
+        {% if faq_3_answer != blank %}
+          <div class="mysheepi-faqs__content">
+            <div class="mysheepi-faqs__answer">
+              {{ faq_3_answer.value | newline_to_br }}
+            </div>
+          </div>
+        {% endif %}
+      </details>
+
+      <details class="mysheepi-faqs__item">
+        <summary class="mysheepi-faqs__question">
+          <span>{{ faq_4_question.value | default: 'Is this a subscription?' }}</span>
+          <span class="mysheepi-faqs__icon" aria-hidden="true"></span>
+        </summary>
+        {% if faq_4_answer != blank %}
+          <div class="mysheepi-faqs__content">
+            <div class="mysheepi-faqs__answer">
+              {{ faq_4_answer.value | newline_to_br }}
+            </div>
+          </div>
+        {% endif %}
+      </details>
+
+      <details class="mysheepi-faqs__item">
+        <summary class="mysheepi-faqs__question">
+          <span>{{ faq_5_question.value | default: 'Are you a takeaway or a meal kit?' }}</span>
+          <span class="mysheepi-faqs__icon" aria-hidden="true"></span>
+        </summary>
+        {% if faq_5_answer != blank %}
+          <div class="mysheepi-faqs__content">
+            <div class="mysheepi-faqs__answer">
+              {{ faq_5_answer.value | newline_to_br }}
+            </div>
+          </div>
+        {% endif %}
+      </details>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const groups = document.querySelectorAll('[data-mysheepi-faqs]');
+
+    groups.forEach((group) => {
+      const items = group.querySelectorAll('.mysheepi-faqs__item');
+
+      items.forEach((item) => {
+        const summary = item.querySelector('.mysheepi-faqs__question');
+        const content = item.querySelector('.mysheepi-faqs__content');
+
+        if (!summary || !content) return;
+
+        if (item.hasAttribute('open')) {
+          content.style.height = content.scrollHeight + 'px';
+        } else {
+          content.style.height = '0px';
+        }
+
+        summary.addEventListener('click', function (event) {
+          event.preventDefault();
+
+          const isOpen = item.hasAttribute('open');
+
+          items.forEach((otherItem) => {
+            if (otherItem === item) return;
+
+            const otherContent = otherItem.querySelector('.mysheepi-faqs__content');
+            if (!otherContent || !otherItem.hasAttribute('open')) return;
+
+            otherContent.style.height = otherContent.scrollHeight + 'px';
+            requestAnimationFrame(() => {
+              otherContent.style.height = '0px';
+            });
+
+            otherItem.removeAttribute('open');
+          });
+
+          if (isOpen) {
+            content.style.height = content.scrollHeight + 'px';
+            requestAnimationFrame(() => {
+              content.style.height = '0px';
+            });
+
+            const onCloseEnd = function (e) {
+              if (e.propertyName !== 'height') return;
+              if (content.style.height !== '0px') return;
+              item.removeAttribute('open');
+              content.removeEventListener('transitionend', onCloseEnd);
+            };
+
+            content.addEventListener('transitionend', onCloseEnd);
+          } else {
+            item.setAttribute('open', '');
+            content.style.height = '0px';
+
+            requestAnimationFrame(() => {
+              content.style.height = content.scrollHeight + 'px';
+            });
+          }
+        });
+
+        content.addEventListener('transitionend', function (e) {
+          if (e.propertyName !== 'height') return;
+          if (item.hasAttribute('open') && content.style.height !== '0px') {
+            content.style.height = 'auto';
+          }
+        });
+      });
+
+      window.addEventListener('resize', function () {
+        items.forEach((item) => {
+          const content = item.querySelector('.mysheepi-faqs__content');
+          if (!content) return;
+
+          if (item.hasAttribute('open')) {
+            content.style.height = 'auto';
+          } else {
+            content.style.height = '0px';
+          }
+        });
+      });
+    });
+  });
+</script>
+
+{% stylesheet %}
+  .mysheepi-faqs {
+    background: #fbece0;
+    padding: 40px 0 72px;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .mysheepi-faqs,
+  .mysheepi-faqs *,
+  .mysheepi-faqs *::before,
+  .mysheepi-faqs *::after {
+    box-sizing: border-box;
+  }
+
+  .mysheepi-faqs__inner {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding-left: 120px;
+    padding-right: 80px;
+  }
+
+  .mysheepi-faqs__heading {
+    margin: 0 0 28px;
+    text-align: center;
+    color: #007663;
+    font-size: 56px;
+    line-height: 1;
+    font-weight: 400;
+    font-family: "Cormorant Garamond", serif;
+  }
+
+  .mysheepi-faqs__list {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .mysheepi-faqs__item {
+    border-top: 1px solid rgba(0, 118, 99, 0.45);
+  }
+
+  .mysheepi-faqs__item:last-child {
+    border-bottom: 1px solid rgba(0, 118, 99, 0.45);
+  }
+
+  .mysheepi-faqs__question {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 0;
+    cursor: pointer;
+    color: #007663;
+    font-size: 18px;
+    line-height: 1.2;
+    font-weight: 400;
+    font-family: "Cormorant Garamond", serif;
+  }
+
+  .mysheepi-faqs__question,
+  .mysheepi-faqs__question:link,
+  .mysheepi-faqs__question:visited,
+  .mysheepi-faqs__question:hover,
+  .mysheepi-faqs__question:active,
+  .mysheepi-faqs__question:focus,
+  .mysheepi-faqs__question:focus-visible {
+    color: #007663;
+  }
+
+  .mysheepi-faqs__question span {
+    color: #007663;
+  }
+
+  .mysheepi-faqs__question:active span,
+  .mysheepi-faqs__question:focus span,
+  .mysheepi-faqs__question:focus-visible span {
+    color: #007663;
+  }
+
+  .mysheepi-faqs__question::-webkit-details-marker {
+    display: none;
+  }
+
+  .mysheepi-faqs__icon {
+    position: relative;
+    width: 12px;
+    height: 12px;
+    flex: 0 0 12px;
+  }
+
+  .mysheepi-faqs__icon::before,
+  .mysheepi-faqs__icon::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 1px;
+    background: #007663;
+    transform: translate(-50%, -50%);
+    transition: transform 0.28s ease, opacity 0.28s ease;
+  }
+
+  .mysheepi-faqs__icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  .mysheepi-faqs__item[open] .mysheepi-faqs__icon::after {
+    opacity: 0;
+  }
+
+  .mysheepi-faqs__content {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.34s ease;
+  }
+
+  .mysheepi-faqs__answer {
+    padding: 0 24px 16px 0;
+    color: #007663;
+    font-size: 16px;
+    line-height: 1.55;
+    font-weight: 400;
+    font-family: "Cormorant Garamond", serif;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  .mysheepi-faqs__item:not([open]) .mysheepi-faqs__answer {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  @media screen and (max-width: 1199px) and (min-width: 990px) {
+    .mysheepi-faqs__inner {
+      padding-left: 60px;
+      padding-right: 60px;
+    }
+  }
+
+  @media screen and (max-width: 989px) {
+    .mysheepi-faqs {
+      padding: 28px 0 60px;
+    }
+
+    .mysheepi-faqs__inner {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+
+    .mysheepi-faqs__heading {
+      font-size: 42px;
+      margin-bottom: 22px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .mysheepi-faqs {
+      padding: 24px 0 52px;
+    }
+
+    .mysheepi-faqs__inner {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .mysheepi-faqs__heading {
+      font-size: 32px;
+      margin-bottom: 18px;
+    }
+
+    .mysheepi-faqs__list {
+      max-width: 100%;
+    }
+
+    .mysheepi-faqs__icon {
+      width: 11px;
+      height: 11px;
+      flex-basis: 11px;
+    }
+
+    .mysheepi-faqs__icon::before,
+    .mysheepi-faqs__icon::after {
+      width: 9px;
+    }
+  }
+
+
+
+
+
+
+  
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "MySheepi FAQs",
+  "settings": [],
+  "presets": [
+    {
+      "name": "MySheepi FAQs"
+    }
+  ]
+}
+{% endschema %}
