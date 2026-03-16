@@ -50,12 +50,6 @@ Metafields used:
 - custom.hero_trust_line
 - custom.hero_image
 - custom.hero_image_mobile
-
-Images are rendered using:
-
-image_url  
-image_tag
-
 ---
 
 ### How It Works
@@ -147,3 +141,26 @@ Fallback values are implemented using the Liquid `default` filter to ensure the 
 Example:
 
 hero_heading | default: "Our product is the best product"
+
+## Responsive Images
+
+All images are rendered using Shopify best practices:
+
+image_url
+image_tag
+
+Example:
+
+hero_image
+| image_url: width: 1600
+| image_tag
+
+## Summary
+
+This project includes:
+
+- metafield-driven content
+- reusable theme sections
+- responsive images
+- fallback handling
+- clean Liquid structure
