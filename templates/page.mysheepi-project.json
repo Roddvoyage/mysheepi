@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "hero": {
+      "type": "mysheepi-hero-intro",
+      "settings": {}
+    },
+    "how_it_works": {
+      "type": "mysheepi-how-it-works",
+      "settings": {}
+    },
+    "why_love_us": {
+      "type": "mysheepi-why-love-us",
+      "settings": {}
+    },
+    "faqs": {
+      "type": "mysheepi-faqs",
+      "settings": {}
+    }
+  },
+  "order": ["hero", "how_it_works", "why_love_us", "faqs"]
+}
